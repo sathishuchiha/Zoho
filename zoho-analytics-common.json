@@ -41,22 +41,13 @@
       "ErrorResponseSchema": {
         "type": "object",
         "properties": {
-          "status": {
-            "type": "string",
-            "example": "failure"
-          },
-          "summary": {
-            "type": "string"
-          },
+          "status": { "type": "string", "example": "failure" },
+          "summary": { "type": "string" },
           "data": {
             "type": "object",
             "properties": {
-              "errorCode": {
-                "type": "integer"
-              },
-              "errorMessage": {
-                "type": "string"
-              }
+              "errorCode": { "type": "integer" },
+              "errorMessage": { "type": "string" }
             }
           }
         }
@@ -64,7 +55,7 @@
     },
     "responses": {
       "Error400": {
-        "description": "Bad Request - Generic error for client-side issues.",
+        "description": "Generic Bad Request response.",
         "content": {
           "application/json": {
             "schema": {
@@ -74,7 +65,7 @@
         }
       },
       "Error404": {
-        "description": "Not Found - Generic error for resource not found.",
+        "description": "Generic Not Found response.",
         "content": {
           "application/json": {
             "schema": {
@@ -84,16 +75,11 @@
         }
       },
       "Error500": {
-        "description": "Internal Server Error - Generic error for server-side issues.",
+        "description": "Generic Internal Server Error response.",
         "content": {
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/ErrorResponseSchema"
-            },
-            "examples": {
-              "Internal Server Error": {
-                "$ref": "#/components/examples/InternalServerErrorExample"
-              }
             }
           }
         }
@@ -143,3 +129,4 @@
     }
   }
 }
+
