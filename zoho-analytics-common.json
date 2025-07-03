@@ -89,6 +89,11 @@
           "application/json": {
             "schema": {
               "$ref": "#/components/schemas/ErrorResponseSchema"
+            },
+            "examples": {
+              "Internal Server Error": {
+                "$ref": "#/components/examples/InternalServerErrorExample"
+              }
             }
           }
         }
