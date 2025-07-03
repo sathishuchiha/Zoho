@@ -37,137 +37,103 @@
         }
       }
     },
+    "schemas": {
+      "ErrorResponseSchema": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "failure"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "errorCode": {
+                "type": "integer"
+              },
+              "errorMessage": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
     "responses": {
       "Error400": {
-        "description": "Bad Request",
+        "description": "Bad Request - Generic error for client-side issues.",
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string",
-                  "example": "failure"
-                },
-                "summary": {
-                  "type": "string",
-                  "example": "LESS_THAN_MIN_OCCURANCE"
-                },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "errorCode": {
-                      "type": "integer",
-                      "example": 8504
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "example": "The parameter CONFIG is not proper(Has not been sent or is less than required count)"
-                    }
-                  }
-                }
-              }
-            },
-            "examples": {
-              "Invalid OAuth Token": {
-                "value": {
-                  "status": "failure",
-                  "summary": "INVALID_OAUTHTOKEN",
-                  "data": {
-                    "errorCode": 8535,
-                    "errorMessage": "Invalid Oauthtoken"
-                  }
-                }
-              },
-              "Less Than Min Occurance": {
-                "value": {
-                  "status": "failure",
-                  "summary": "LESS_THAN_MIN_OCCURANCE",
-                  "data": {
-                    "errorCode": 8504,
-                    "errorMessage": "The parameter CONFIG is not proper(Has not been sent or is less than required count)"
-                  }
-                }
-              }
+              "$ref": "#/components/schemas/ErrorResponseSchema"
             }
           }
         }
       },
       "Error404": {
-        "description": "Not Found",
+        "description": "Not Found - Generic error for resource not found.",
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string",
-                  "example": "failure"
-                },
-                "summary": {
-                  "type": "string",
-                  "example": "META_OBJECT_NOT_PRESENT"
-                },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "errorCode": {
-                      "type": "integer",
-                      "example": 7103
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "example": "Workspace not found! Please check whether the workspace exists."
-                    }
-                  }
-                }
-              }
+              "$ref": "#/components/schemas/ErrorResponseSchema"
+            }
+          }
+        }
+      },
+      "Error500": {
+        "description": "Internal Server Error - Generic error for server-side issues.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponseSchema"
             },
             "examples": {
-              "Workspace Not Found": {
+              "Internal Server Error": {
                 "value": {
                   "status": "failure",
-                  "summary": "META_OBJECT_NOT_PRESENT",
+                  "summary": "INTERNAL_SERVER_ERROR",
                   "data": {
-                    "errorCode": 7103,
-                    "errorMessage": "Workspace not found! Please check whether the workspace exists."
+                    "errorCode": 5000,
+                    "errorMessage": "An unexpected error occurred on the server."
                   }
                 }
               }
             }
           }
         }
+      }
+    },
+    "examples": {
+      "InvalidOAuthTokenExample": {
+        "value": {
+          "status": "failure",
+          "summary": "INVALID_OAUTHTOKEN",
+          "data": {
+            "errorCode": 8535,
+            "errorMessage": "Invalid Oauthtoken"
+          }
+        }
       },
-      "Error500": {
-        "description": "Internal Server Error",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string",
-                  "example": "failure"
-                },
-                "summary": {
-                  "type": "string",
-                  "example": "INTERNAL_SERVER_ERROR"
-                },
-                "data": {
-                  "type": "object",
-                  "properties": {
-                    "errorCode": {
-                      "type": "integer",
-                      "example": 5000
-                    },
-                    "errorMessage": {
-                      "type": "string",
-                      "example": "An unexpected error occurred on the server."
-                    }
-                  }
-                }
-              }
-            }
+      "LessThanMinOccuranceExample": {
+        "value": {
+          "status": "failure",
+          "summary": "LESS_THAN_MIN_OCCURANCE",
+          "data": {
+            "errorCode": 8504,
+            "errorMessage": "The parameter CONFIG is not proper(Has not been sent or is less than required count)"
+          }
+        }
+      },
+      "WorkspaceNotFoundExample": {
+        "value": {
+          "status": "failure",
+          "summary": "META_OBJECT_NOT_PRESENT",
+          "data": {
+            "errorCode": 7103,
+            "errorMessage": "Workspace not found! Please check whether the workspace exists."
           }
         }
       }
