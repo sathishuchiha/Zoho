@@ -96,7 +96,7 @@
                   "status": "failure",
                   "summary": "INTERNAL_SERVER_ERROR",
                   "data": {
-                    "errorCode": 5000,
+                    "errorCode": 7005,
                     "errorMessage": "An unexpected error occurred on the server."
                   }
                 }
